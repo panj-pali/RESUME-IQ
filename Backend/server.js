@@ -6,6 +6,13 @@ const app = require('./src/app');
 
 const PORT = process.env.PORT || 3100;
 
+app.get("/", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "ResumeIQ Backend is running!"
+  });
+});
+
 const startServer = async () => {
   try {
     await connectDB();
