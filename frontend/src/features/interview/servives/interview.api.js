@@ -2,9 +2,9 @@
 import axios from "axios";
 
 const api = axios.create({
+    baseURL: import.meta.env.VITE_API_URL,
     withCredentials: true
 });
-
 
 // Generate interview report
 export const generateInterviewReport = async ({
@@ -13,7 +13,6 @@ export const generateInterviewReport = async ({
     resumeFile,
     preparationDays = 7
 }) => {
-
     const formData = new FormData();
 
     formData.append("jobDescription", jobDescription);
@@ -29,10 +28,8 @@ export const generateInterviewReport = async ({
     return response.data;
 };
 
-
 // Get report by ID
 export const getInterviewReportById = async (interviewId) => {
-
     const response = await api.get(
         `/api/interview/report/${interviewId}`
     );
@@ -40,10 +37,8 @@ export const getInterviewReportById = async (interviewId) => {
     return response.data;
 };
 
-
 // Get all interview reports
 export const getAllInterviewReports = async () => {
-
     const response = await api.get("/api/interview/");
 
     console.log("ALL REPORTS:", response.data);
@@ -51,12 +46,10 @@ export const getAllInterviewReports = async () => {
     return response.data;
 };
 
-
 // Generate resume PDF
 export const generateResumePdf = async ({
     interviewReportId
 }) => {
-
     const response = await api.post(
         `/api/interview/resume/pdf/${interviewReportId}`,
         null,
